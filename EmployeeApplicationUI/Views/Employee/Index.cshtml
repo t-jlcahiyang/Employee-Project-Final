@@ -1,0 +1,317 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<h2>Employees</h2>
+<button id="buttonAdd" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalForAdd" style="margin-bottom:10px;">Add Employee</button>
+<table id="EmployeeTable" class="table table-stripped table-bordered">
+    <thead>
+        <tr>
+            <th style="display:none">ID</th>
+            <th>Employee Number</th>
+            <th style="display:none" >First Name</th>
+            <th style="display:none" >Middle Name</th>
+            <th style="display:none" >Last Name</th>
+            <th>Full Name</th>
+            <th>Birth Date</th>
+            <th>Daily Rate</th>
+            <th>Working days</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+@* Add modal *@
+<div class="modal fade" id="ModalForAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Employee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <div class="mb-3 row align-items-center">
+                   <label for="FirstName" class="col-sm-3 col-form-label">First Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="FirstName" class="form-control" />
+                    </div>
+               </div>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="MiddleName" class="col-sm-3 col-form-label">Middle Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="MiddleName" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="LastName" class="col-sm-3 col-form-label">Last Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="LastName" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="BirthDate" class="col-sm-3 col-form-label">Birth Date</label>
+                    <div class="col-sm-9">
+                        <input type="date" id="BirthDate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="DailyRate" class="col-sm-3 col-form-label">Daily Rate</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="DailyRate" class="form-control" />
+                    </div>
+                </div>
+
+
+                <div class="mb-3 row align-items-center">
+                    <label for="BirthDate" class="col-sm-3 col-form-label">Working Days</label>
+                    <div class="col-sm-9 d-flex gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="M" id="dayM" />
+                            <label class="form-check-label" for="dayM">Mon</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="T" id="dayT" />
+                            <label class="form-check-label" for="dayT">Tue</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="W" id="dayW" />
+                            <label class="form-check-label" for="dayW">Wed</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="TH" id="dayTH" />
+                            <label class="form-check-label" for="dayTH">Thurs</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="F" id="dayF" />
+                            <label class="form-check-label" for="dayF">Fri</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="S" id="dayS" />
+                            <label class="form-check-label" for="dayS">Sat</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="SU" id="daySU" />
+                            <label class="form-check-label" for="daySU">Sun</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="SaveAdd" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@* Edit modal *@
+<div class="modal fade" id="ModalForEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Employee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="ID"/>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="EditFirstName" class="col-sm-3 col-form-label">First Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="EditFirstName" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="EditMiddleName" class="col-sm-3 col-form-label">Middle Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="EditMiddleName" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="EditLastName" class="col-sm-3 col-form-label">Last Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="EditLastName" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="EditBirthDate" class="col-sm-3 col-form-label">Birth Date</label>
+                    <div class="col-sm-9">
+                        <input type="date" id="EditBirthDate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="EditDailyRate" class="col-sm-3 col-form-label">Daily Rate</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="EditDailyRate" class="form-control" />
+                    </div>
+                </div>
+
+
+                <div class="mb-3 row align-items-center">
+                    <label  class="col-sm-3 col-form-label">Working Days</label>
+                    <div class="col-sm-9 d-flex gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="M" id="dayM" />
+                            <label class="form-check-label" for="dayM">Mon</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="T" id="dayT" />
+                            <label class="form-check-label" for="dayT">Tue</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="W" id="dayW" />
+                            <label class="form-check-label" for="dayW">Wed</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="TH" id="dayTH" />
+                            <label class="form-check-label" for="dayTH">Thurs</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="F" id="dayF" />
+                            <label class="form-check-label" for="dayF">Fri</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="S" id="dayS" />
+                            <label class="form-check-label" for="dayS">Sat</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="SU" id="daySU" />
+                            <label class="form-check-label" for="daySU">Sun</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="SaveEdit" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* Modal for takehome pay *@
+<div class="modal fade" id="ModalForPay" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Compute Take Home Pay </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3 row align-items-center">
+                    <label for="CompEmpNumber" class="col-sm-3 col-form-label" >Employee Number</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="CompEmpNumber" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="StartDate" class="col-sm-3 col-form-label">Start Date</label>
+                    <div class="col-sm-9">
+                        <input type="date" id="StartDate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="EndDate" class="col-sm-3 col-form-label">End Date</label>
+                    <div class="col-sm-9">
+                        <input type="date" id="EndDate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="CompDailyRate" class="col-sm-3 col-form-label" >Daily Rate</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="CompDailyRate" class="form-control" readonly />
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="CheckTakeHomePay" class="btn btn-primary">Show Result</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url: "https://localhost:7238/api/Employee",
+            type: "GET",
+            success: function(employees){
+                 // console.log("List",employees);
+                var tableBody = "";
+                employees.forEach(emp => {
+                    tableBody += `<tr>
+                    <td style="display:none">${emp.id}</td>
+                    <td >${emp.employeeNumber}</td>
+                     <td style="display:none">${emp.firstName}</td>
+                     <td style="display:none" >${emp.middleName}</td>
+                     <td style="display:none" >${emp.lastName}</td>
+                    <td>${emp.lastName}, ${emp.middleName} ${emp.firstName}</td>
+                    <td>${emp.birthDate}</td>
+                    <td>${emp.dailyRate}</td>
+                    <td>${emp.workingDays}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning btn-edit">Edit</button>
+                        <button class="btn btn-sm btn-danger btn-delete">Delete</button>
+                        <button class="btn btn-sm btn-info btn-takehome">Compute Pay</button>
+                    </td>
+
+                    </tr>`;
+                });
+                $("#EmployeeTable tbody").html(tableBody);
+            },
+            error: function (err){
+                console.error("error", err);
+            }
+        });
+    });
+
+</script>
+
+<script src="~/js/addemployee.js"></script>
+<script src="~/js/editemployee.js"></script>
+<script src="~/js/delete.js"></script>
+<script src="~/js/takehomepay.js"></script>

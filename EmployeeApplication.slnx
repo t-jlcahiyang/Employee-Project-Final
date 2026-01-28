@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="EmployeeApplication/EmployeeApplication.csproj" />
+  <Project Path="EmployeeApplicationUI/EmployeeApplicationUI.csproj" Id="1b6cbc31-0074-4ca9-9f37-57839afeae6d" />
+</Solution>
